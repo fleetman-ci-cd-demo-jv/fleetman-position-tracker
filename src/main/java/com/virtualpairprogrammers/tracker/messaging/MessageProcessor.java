@@ -5,14 +5,14 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
+import com.virtualpairprogrammers.tracker.data.Data;
+import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
+import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import com.virtualpairprogrammers.tracker.data.Data;
-import com.virtualpairprogrammers.tracker.domain.VehicleBuilder;
-import com.virtualpairprogrammers.tracker.domain.VehiclePosition;
 
 @Component
 public class MessageProcessor {
@@ -32,7 +32,8 @@ public class MessageProcessor {
 				                          .withName(incomingMessage.get("vehicle"))
 				                          .withLat(new BigDecimal(incomingMessage.get("lat")))
 				                          .withLng(new BigDecimal(incomingMessage.get("long")))
-				                          .withTimestamp(convertedDatestamp)
+										  .withTimestamp(convertedDatestamp)
+										  .withSpeed(47.5)
 				                          .build();
 				                          
 		data.updatePosition(newReport);
